@@ -1,6 +1,7 @@
 ## How to run
 
 Clone the repository and open the project folder in VS Code. Since I built the app using vanilla HTML, CSS, and JavaScript, no extra installation is required. Simply open the `index.html` file in the browser or use the VS Code Live Server extension for a better development experience. If deployed, the live URL can also be accessed directly in the browser.
+or Live Demo Link: https://nimrahnaeem192.github.io/Pomodoro_Timer_Assessment/
 
 ## Stack & design choices
 
