@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+<style>
+
+body{
+    /* full screen dark background */
+    background-color:rgb(16, 16, 16);
+
+    /* center container horizontally and vertically */
+    justify-content: center; 
+    align-items: center;  
+    height: 100vh;
+    display: flex;
+}
+
+.container{
+    /* main card styling */
+    background-color: rgb(34, 33, 33);
+    text-align: center;
+    color: white;
+    padding: 3%;
+    width: 30%;
+    border-radius: 10%;
+}
+
+.timer{
+    /* big timer display */
+    font-weight: bolder;
+    font-size: larger;
+}
+
+.button{
+    /* button row layout */
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+</style>
+</head>
+
+<body>
+
+    <!-- main container holding entire app -->
+    <div class="container">
+
+        <!-- title section -->
+        <div class="title">
+            <h1>Pomodoro Timer</h1>
+        </div>
+
+        <!-- mode display (focus / break) -->
+        <div class="mode">
+            <h2 id="mode">Focus Mode</h2>
+        </div>
+
+        <!-- timer display -->
+        <div class="timer">
+            <h3 id="timer">25:00</h3>
+        </div>
+
+        <!-- control buttons -->
+        <div class="button">
+            <button>Start</button>
+            <button>Pause</button>
+            <button>Reset</button>
+        </div> 
+
+        <br><br>
+
+        <!-- input fields for custom timer values -->
+        <div class="input-fields">
+            <label for="focus">Focus</label>
+            <input type="number" id="focus" value="25">  <br><br>
+            <label for="break">Break</label>
+            <input type="number" id="break" value="5">  <br><br>
+        </div>
+
+        <!-- session history section -->
+        <h3>Today's Sessions</h3>
+        <ul id="history">
+
+        </ul>
+
+    </div>
+
+<script>
+
+const timer = document.getElementById("timer");
+const mode = document.getElementById("mode");
+
+const startBtn = document.querySelectorAll("button")[0];
+const pauseBtn = document.querySelectorAll("button")[1];
+const resetBtn = document.querySelectorAll("button")[2];
+
+const focusInput = document.getElementById("focus");
+const breakInput = document.getElementById("break");
+
+const history = document.getElementById("history");
+
+let seconds = focusInput.value * 60;
+let running = false;
+let currentMode = "focus";
+
+let interval;
+
+// show timer on screen
+function updateTimer() {
+
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = seconds % 60;
+
+    if (remainingSeconds < 10) {
+        remainingSeconds = "0" + remainingSeconds;
+    }
+
+    timer.innerText = `${minutes}:${remainingSeconds}`;
+}
+
+// start timer
+startBtn.addEventListener("click", function () {
+
+    if (running) {
+        return;
+    }
+
+    running = true;
+
+    interval = setInterval(function () {
+
+        seconds--;
+
+        updateTimer();
+
+        // when timer ends
+        if (seconds <= 0) {
+
+            clearInterval(interval);
+
+            // save focus history
+            if (currentMode === "focus") {
+
+                let li = document.createElement("li");
+
+                let currentTime = new Date().toLocaleTimeString([], {
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+
+                li.innerText = `✓ ${focusInput.value}:00 - ${currentTime}`;
+
+                history.appendChild(li);
+
+                currentMode = "break";
+                mode.innerText = "Break Mode 🟢";
+
+                seconds = breakInput.value * 60;
+
+            } else {
+
+                currentMode = "focus";
+                mode.innerText = "Focus Mode 🔴";
+
+                seconds = focusInput.value * 60;
+            }
+
+            running = false;
+
+            updateTimer();
+
+            startBtn.click();
+        }
+
+    }, 1000);
+
+});
+
+// pause timer
+pauseBtn.addEventListener("click", function () {
+
+    clearInterval(interval);
+
+    running = false;
+
+    mode.innerText = "Paused 🟡";
+});
+
+// reset timer
+resetBtn.addEventListener("click", function () {
+
+    clearInterval(interval);
+
+    running = false;
+
+    currentMode = "focus";
+
+    mode.innerText = "Focus Mode 🔴";
+
+    seconds = focusInput.value * 60;
+
+    updateTimer();
+});
+
+// first timer display
+updateTimer();
+
+</script>
+
+</body>
+</html>
