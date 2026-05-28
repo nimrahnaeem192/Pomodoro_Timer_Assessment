@@ -1,2 +1,38 @@
 # Pomodoro_Timer_Assessment
-A simple Pomodoro Timer built with HTML, CSS, and JavaScript. It helps users manage focus and break sessions using the Pomodoro technique. Features include start/pause/reset controls, automatic switching between focus and break modes, and session history tracking. Clean UI with adjustable timer settings.
+
+A simple and responsive Pomodoro Timer built using HTML, CSS, and JavaScript.
+
+## Features
+
+* Focus and Break modes
+* Start, Pause, and Reset functionality
+* Automatic switching between focus and break sessions
+* Session history tracking
+* Clean and minimal user interface
+
+## Technologies Used
+
+* HTML
+* CSS
+* JavaScript
+
+## Live Demo
+
+https://yourusername.github.io/repository-name/
+
+
+## How to Run
+
+1. Download or clone the repository
+2. Open `index.html` in a browser
+
+## Project Structure
+
+index.html
+README.md
+answers.md
+
+## Author
+
+Nimra
+
