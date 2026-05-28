@@ -18,7 +18,7 @@ A simple and responsive Pomodoro Timer built using HTML, CSS, and JavaScript.
 
 ## Live Demo
 
-https://yourusername.github.io/repository-name/
+(https://nimrahnaeem192.github.io/Pomodoro_Timer_Assessment/)
 
 
 ## How to Run
